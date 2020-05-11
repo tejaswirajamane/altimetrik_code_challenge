@@ -1,7 +1,9 @@
 package com.altimetrik;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
@@ -28,7 +30,7 @@ public class LinkedInPageTest {
 	}
 
 	@Test(priority = 1)
-	public void linkedIn_Challenge() throws InterruptedException {
+	public void linkedIn_Challenge() throws Exception {
 		loginPage = new LoginPage(driver);
 		loginPage.launch_Browser_And_Click_On_SignIn();
 		loginPage.login_Using_DataProvider();

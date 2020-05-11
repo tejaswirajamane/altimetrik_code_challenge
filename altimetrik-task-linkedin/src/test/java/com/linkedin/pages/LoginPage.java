@@ -1,8 +1,11 @@
 package com.linkedin.pages;
 
+import java.io.IOException;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.BeforeTest;
 
 import com.altimetrik.utils.BasePage;
 import com.altimetrik.utils.TestDataUtil;
@@ -36,10 +39,11 @@ public class LoginPage extends BasePage {
 
 	}
 
-	public void login_Using_DataProvider() {
+	public void login_Using_DataProvider() throws IOException, ParseException {
 		TestDataUtil tsu = new TestDataUtil();
-		driver.findElement(USER_NAME).sendKeys(tsu.getStringData("LoginLinkedInTestdata", 1, 0));
-		driver.findElement(PASSWORD).sendKeys(tsu.getStringData("LoginLinkedInTestdata", 1, 1));
+		JSONObject user=tsu.getJsonData();
+		driver.findElement(USER_NAME).sendKeys((String) user.get("username"));
+		driver.findElement(PASSWORD).sendKeys((String) user.get("password"));
 		highlight(driver.findElement(SUBMIT_BTN));
 		takeScreenshot("SUBMIT_BTN clicking");
 		driver.findElement(SUBMIT_BTN).click();
